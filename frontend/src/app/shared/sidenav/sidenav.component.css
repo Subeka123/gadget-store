@@ -1,0 +1,16 @@
+#sidebar-wrapper {
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Fix the sidebar to the left */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+  }
+  
+  #page-content-wrapper {
+    margin-left: 250px; /* Adjust this value to match the sidebar width */
+    width: calc(100% - 250px); /* Ensure the content takes the remaining width */
+  }
+
+  a:hover{
+    cursor: pointer;
+  }
