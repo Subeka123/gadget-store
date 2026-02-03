@@ -1,0 +1,15 @@
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-dark border-end text-white" id="sidebar-wrapper">
+      <div class="sidebar-heading p-3 fs-4 fw-bold border-bottom text-center">📦 Gadget Store</div>
+      <div class="list-group list-group-flush">
+        <a routerLink="/home/gadgets" class="list-group-item list-group-item-action bg-dark text-white">📋 Gadgets</a>
+        <a (click)="logout()" class="list-group-item list-group-item-action bg-dark text-danger mt-auto">🚪 Logout</a>
+      </div>
+    </div>
+  
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="flex-grow-1 p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>

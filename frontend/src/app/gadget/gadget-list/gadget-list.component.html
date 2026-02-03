@@ -1,0 +1,105 @@
+<div class="container mt-4">
+  <h2 class="text-center">Gadget Inventory</h2>
+
+  <div class="d-flex flex-wrap justify-content-between mb-3">
+    <button class="btn btn-primary mb-2" (click)="openModal(gadgetModal)">Add Gadget</button>
+    <div>
+      <button class="btn btn-primary mb-2 me-2" [disabled]="!selectedGadgets.length"
+        (click)="bulkUpdate(bulkUpdateModal)">Bulk Update</button>
+      <button class="btn btn-danger mb-2" [disabled]="!selectedGadgets.length" (click)="bulkDelete()">Bulk
+        Delete</button>
+    </div>
+  </div>
+
+  <!-- Responsive Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th><input type="checkbox" (change)="toggleAllSelection($event)"></th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gadget of gadgets | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+          <td><input type="checkbox" [(ngModel)]="gadget.selected" (change)="updateSelectedGadgets()"></td>
+          <td>{{ gadget.id }}</td>
+          <td>{{ gadget.name }}</td>
+          <td>${{ gadget.price }}</td>
+          <td>{{ gadget.quantity }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-2" (click)="editGadget(gadget, gadgetModal)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteGadget(gadget.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <pagination-controls (pageChange)="page = $event" previousLabel="Prev" nextLabel="Next"
+    class="d-flex justify-content-center">
+  </pagination-controls>
+</div>
+
+
+<ng-template #gadgetModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ selectedGadget.id ? 'Edit Gadget' : 'Add Gadget' }}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedGadget.name" name="name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" [(ngModel)]="selectedGadget.price" name="price">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" [(ngModel)]="selectedGadget.quantity" name="quantity">
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="saveGadget(modal)">
+      {{ selectedGadget.id ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- Bulk Update Modal -->
+<ng-template #bulkUpdateModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Bulk Update Gadgets</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" [(ngModel)]="bulkUpdateData.price" name="price">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" [(ngModel)]="bulkUpdateData.quantity" name="quantity">
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="saveBulkUpdate(modal)">Apply Changes</button>
+  </div>
+</ng-template>

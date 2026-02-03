@@ -1,0 +1,47 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+      <h3 class="text-center mb-4">🔐 Login</h3>
+  
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+        <!-- Username -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            [(ngModel)]="username"
+            name="username"
+            required
+          />
+        </div>
+  
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary" [disabled]="loading || !loginForm.valid">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+            Login
+          </button>
+        </div>
+  
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3 text-center">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,45 @@
+#wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #sidebar-wrapper {
+    width: 240px;
+    min-height: 100vh;
+    transition: all 0.3s;
+  }
+  
+  #page-content-wrapper {
+    overflow-y: auto;
+    width: 100%;
+    background-color: #f8f9fa;
+  }
+  
+  .list-group-item {
+    border: none;
+    padding: 15px 20px;
+    font-weight: 500;
+  
+    &:hover {
+      background-color: #495057;
+    }
+  }
+  
+  .sidebar-heading {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    #sidebar-wrapper {
+      width: 100%;
+      position: fixed;
+      z-index: 1000;
+      height: auto;
+    }
+  
+    #page-content-wrapper {
+      padding: 1rem;
+    }
+  }
