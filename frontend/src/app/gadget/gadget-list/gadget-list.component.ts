@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { GadgetService } from '../gadget.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-gadget-list',
-  imports: [NgFor,FormsModule, NgxPaginationModule],
+  imports: [NgFor,FormsModule, NgxPaginationModule,CommonModule],
   templateUrl: './gadget-list.component.html',
   styleUrl: './gadget-list.component.css'
 })
