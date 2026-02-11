@@ -16,6 +16,11 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { username, password });
   }
 
+  register(data: { username: string; email: string; password: string }) {
+    console.log('Registering user with data:', data);
+    return this.http.post<{ message: string }>(`${this.apiUrl}/register`, data);
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }
