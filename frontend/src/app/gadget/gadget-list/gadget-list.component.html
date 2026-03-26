@@ -1,6 +1,9 @@
 <div class="container mt-4">
   <h2 class="text-center">Gadget Inventory</h2>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search by name" class="mb-3" 
+  name="searchTerm" id="searchTerm" (input)="onSearch()">
+
   <div class="d-flex flex-wrap justify-content-between mb-3">
     <button class="btn btn-primary mb-2" (click)="openModal(gadgetModal)">Add Gadget</button>
     <div>
@@ -25,7 +28,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let gadget of gadgets | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
+        <ng-container *ngIf="filteredGadgets.length; else noData">
+        <tr *ngFor="let gadget of filteredGadgets | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
           <td><input type="checkbox" [(ngModel)]="gadget.selected" (change)="updateSelectedGadgets()"></td>
           <td>{{ gadget.id }}</td>
           <td>{{ gadget.name }}</td>
@@ -36,6 +40,12 @@
             <button class="btn btn-danger btn-sm" (click)="deleteGadget(gadget.id)">Delete</button>
           </td>
         </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td colspan="6" class="text-center">No gadgets found.</td>
+          </tr>
+        </ng-template>
       </tbody>
     </table>
   </div>

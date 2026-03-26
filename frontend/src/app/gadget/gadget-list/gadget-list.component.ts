@@ -19,6 +19,7 @@ export class GadgetListComponent implements OnInit {
   bulkUpdateData: any = { price: null, quantity: null }; 
   modalMode: 'add' | 'edit' | 'bulk' = 'add'; 
 
+  searchTerm: string = '';
 
   page: number = 1; // Current page
   itemsPerPage = 5; // Items per page
@@ -27,6 +28,15 @@ export class GadgetListComponent implements OnInit {
 
   ngOnInit() {
     this.fetchGadgets();
+  }
+
+  get filteredGadgets() {
+    if (!this.searchTerm) return this.gadgets;
+    return this.gadgets.filter(gadget => gadget.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+  }
+
+  onSearch() {
+    this.page = 1; // Reset to first page when searching
   }
 
   fetchGadgets() {
